@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+	
+	<head>
+
+		<meta charset="utf-8">
+		<title>Сервіс Обліку Студентів</title>
+		<meta name="description"
+			  value="Система Обліку Студентів Навчального Закладу"/>
+
+		<!-- Include styles -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/main.css">
+	
+	</head>
+	
+	<body>
+
+		<!--Start Container-->
+		<div class="container">
+
+			<!--Header-->
+			<div class="row" id="header">
+				
+				<!--Logo-->
+				<div class="col-xs-8">
+					<h1>Форма редагування Студента</h1>
+				</div>
+
+			</div>
+
+			<!--Start Main Page Content-->
+			<div class="row" id="content-columns">
+
+				<div class="col-xs-12" id="content-column">
+					
+					<form>
+						<div class="row form-student">
+							<p class="col-xs-2">Ім'я*</p>
+							<input class="col-xs-3" type="text" name="name" value="Віталій">
+						</div>
+						<div class="row form-student">
+							<p class="col-xs-2">По-батькові</p>
+							<input class="col-xs-3" type="text" name="grandname" value="Іванович">
+						</div>
+						<div class="row form-student">
+							<p class="col-xs-2">Прізвище*</p>
+							<input class="col-xs-3" type="text" name="surname" value="Подоба">
+						</div>
+						<div class="row form-student">
+							<p class="col-xs-2">№ Білету*</p>
+							<input class="col-xs-3" type="text" name="ticket" value="254">
+						</div>
+						<div class="row form-student">
+							<p class="col-xs-2">Дата народження</p>
+							<input class="col-xs-3" type="text" name="DoB" value="1984-06-17">
+						</div>
+					</form>
+
+					<div class="row form-student">
+						<p class="col-xs-2" style="line-height:4em;">Фото</p>
+						<p class="col-xs-8" style="text-align: left;">Наразі:
+							<a href="./img/student.jpg">/img/student.jpg</a>
+							<input type="checkbox" name="select" style="text-align: left;">
+						</p>
+						<a class="col-xs-3" href="#" style="text-align:left;">Очистити</a>
+					</div>
+
+					<form>
+						<div class="row form-group form-student">
+							<p class="col-xs-2"></p>
+							<p class="col-xs-10" style="text-align: left;">
+								Змінити
+								<input type="file" class="form-control-file" id="exampleFormControlFile1">
+							</p>
+						</div>
+					</form>
+
+					<!--Group Selector-->
+					<div class="row form-student">
+						<p class="col-xs-2">Група*</p>
+						<select class="col-xs-3">
+							<option value="">МтМ - 21</option>
+							<option value="">МтМ - 22</option>
+						</select>
+					</div>
+
+					<form>
+						<div class="row form-student">
+							<p class="col-xs-2">Нотатки</p>
+							<input class="col-xs-3" type="text" name="notes" style="height: 150px;">
+						</div>
+
+						<div class="row form-button">
+							<div class="col-xs-2"></div>
+							<div class="col-xs-8" style="text-align: left;">
+								<button type="button" class="btn btn-primary">Зберегти</button>
+								<button type="button" class="btn btn-secondary">Скасувати</button>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+
+			</div>
+			<!--End Main Page Content-->
+
+		</div>
+		<!--End Container-->
+
+		<!-- Java Script Section -->
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	</body>
+
+</html>

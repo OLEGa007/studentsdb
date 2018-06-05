@@ -19,3 +19,45 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	line-height: 30px;
 	color: #555555;
 }
+
+ul.month-navigation {
+	position: relative;   
+	float: left;   left: 50%;   
+	list-style: none;   
+	margin: 0;
+	padding: 0; 
+}
+
+ul.month-navigation li {
+	display: inline;
+	position: relative;   
+	float: left;   
+	right: 50%;
+	padding: 3px;
+}
+
+.centered th {
+	text-align: center;
+}
+
+.centered td {
+	text-align: center;
+}
+
+.form-student {
+	text-align: right;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.form-student p {
+	line-height:2em;
+}
+
+.form-button {
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #DCDCDC
+
+}

@@ -16,8 +16,25 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from students import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', views.students_list, name='Students List'),
-]
+	url(r'^admin/', admin.site.urls),
+
+	# Students urls
+    url(r'^$', views.students_list, name='students_list'),
+    url(r'^add/$', views.students_add, name='students_add'),
+    url(r'^(?P<sid>[0-9]+)/edit/$', views.students_edit, name='students_edit'),
+    url(r'^(?P<sid>[0-9]+)/delete/$', views.students_delete, name='students_delete'),
+
+    # Groups urls
+    url(r'^groups/$', views.groups_list, name='groups_list'),
+    url(r'^groups/(?P<gid>[0-9]+)/edit/$', views.groups_edit, name='groups_edit'),
+    url(r'^groups/(?P<gid>[0-9]+)/delete/$', views.groups_delete, name='groups_delete'),
+
+    #Journal urls
+    url(r'^journal/$', views.journal, name='journal'),
+
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

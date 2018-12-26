@@ -6,6 +6,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 
+# Views for students
+
 def students_list(request):
 	students = (
 		{'id': 1,
@@ -26,33 +28,41 @@ def students_list(request):
 	)
 	return render(request, 'students/students_list.html', {'students': students})
 
-
-# Views for students
-
-def students_add(requeste):
+def students_add(request):
 	return HttpResponse('Here we will have add student page	')
 
-def students_edit(requeste, sid):
+def students_edit(request, sid):
 	return HttpResponse('student %s edit form' % sid)
 
-def students_delete(requeste, sid):
+def students_delete(request, sid):
 	return HttpResponse('student %s delete form' % sid)
 
 # Views for groups
 
-def groups_list(requeste):
-	return HttpResponse('groups_list')
+def groups_list(request):
+	groups = (
+		{'id' : 1,
+		 'name' : u'МтМ-21',
+		 'head' : u'Ячменев Олег'},
+		{'id' : 2,
+		 'name' : u'МтМ-22',
+		 'head' : u'Віталій Подоба'},
+		{'id' : 3,
+		 'name' : u'МтМ-23',
+		 'head' : u'Іванов Андрій'},
+	)
+	return render(request, 'students/groups_list.html', {'groups' : groups})
 
-def groups_add(requeste, gid):
-	return HttpResponse('group %s add form' % gid)
+def groups_add(request):
+	return HttpResponse('groups add form')
 
-def groups_edit(requeste, gid):
+def groups_edit(request, gid):
 	return HttpResponse('group %s edit form' % gid)
 
-def groups_delete(requeste, gid):
+def groups_delete(request, gid):
 	return HttpResponse('group %s delete form' % gid)
 
 # Views for journal
 
-def journal(requeste):
+def journal(request):
 	return HttpResponse('journal')

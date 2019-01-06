@@ -4,10 +4,6 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
-
-# Views for students
-
 def students_list(request):
 	students = (
 		{'id': 1,
@@ -36,33 +32,3 @@ def students_edit(request, sid):
 
 def students_delete(request, sid):
 	return HttpResponse('student %s delete form' % sid)
-
-# Views for groups
-
-def groups_list(request):
-	groups = (
-		{'id' : 1,
-		 'name' : u'МтМ-21',
-		 'head' : u'Ячменев Олег'},
-		{'id' : 2,
-		 'name' : u'МтМ-22',
-		 'head' : u'Віталій Подоба'},
-		{'id' : 3,
-		 'name' : u'МтМ-23',
-		 'head' : u'Іванов Андрій'},
-	)
-	return render(request, 'students/groups_list.html', {'groups' : groups})
-
-def groups_add(request):
-	return HttpResponse('groups add form')
-
-def groups_edit(request, gid):
-	return HttpResponse('group %s edit form' % gid)
-
-def groups_delete(request, gid):
-	return HttpResponse('group %s delete form' % gid)
-
-# Views for journal
-
-def journal(request):
-	return HttpResponse('journal')

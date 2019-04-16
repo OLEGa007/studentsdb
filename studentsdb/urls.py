@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from students import views
+from students import models
 from django.conf import settings
 from django.conf.urls.static import static
+from .settings import MEDIA_ROOT, DEBUG
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
@@ -37,5 +39,12 @@ urlpatterns = [
     #Journal urls
     url(r'^journal/$', views.journal, name='journal'),
 
+    #Contact Admin Form
+    url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if DEBUG:
+    #serve files from media folder
+#    urlpatterns += ['', url(r'^media/(?P<path>.*)$', django.views.static.serve, {'document_root' : MEDIA_ROOT})]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

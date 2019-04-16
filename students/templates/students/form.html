@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+	<head>
+		<meta charset="utf8"/>
+		<title>Демо Форма</title>
+		<meta name="description"
+			  value="Система Обліку Студентів Навчального Закладу"/>
+
+		<!-- Include styles -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static "css/main.css" %}">
+	</head>
+
+	<body>
+
+    <form action="submit_form.html" method='post' enctype="multipart/form-data" name="myform">
+      <input type="hidden" name="student_id" value="27"/>
+
+      <div>
+        <label for="first_name">Ваше імʼя</label>
+        <input type="text" name="first_name" value="" id="first_name"/>
+      </div>
+
+      <div>
+        <label for="graduated">Закінчили навчання?</label>
+        <input type="checkbox" checked="1" name="graduated" value="1" id="graduated"/>
+      </div>
+
+      <div>
+        <label for="gender">Ваша стать</label>
+        <input type="radio" name="gender" value="male" id="gender"/>
+        <input type="radio" name="genger" value="female"  id="gender"/>
+      </div>
+
+      <div>
+        <label for="age">Ваш вік</label>
+        <select name="age" id="age">
+          <option value="">Будь-ласка виберіть ваш вік</option>
+          <option value="10">Більше ніж 10</option>
+          <option value="20">Більше ніж 20</option>
+        </select>
+      </div>
+
+      <input type="submit" name="save_button" value="Зберегти">
+
+    </form>
+
+  </body>
+
+</html>

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for studentsdb project.
 
@@ -25,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y0i%s!zkd*^wz=+6sq1qf^j$jcfhtr#*(+9&6%+)8ad0w^0ot3'
+SECRET_KEY = '...'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,9 +91,9 @@ DATABASES = {
 #    }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'studentsdb',
-        'USER': 'oleh',
-        'PASSWORD': '18122006',
+        'NAME': '...',
+        'USER': '...',
+        'PASSWORD': '...',
         'HOST': 'localhost',
         'PORT': '',
     }

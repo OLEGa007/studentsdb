@@ -2,12 +2,34 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block meta_title %}Зв'язок з адміністратором{% endblock meta_title %}
 
 {% block title %}Зв'язок з адміністратором{% endblock title %}
 
 {% block content %}
 
-тут буде форма контакту
+{% crispy form %}
+
+<!-- <form action="{% url "contact_admin" %}" method="post">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+  <input type="submit" name="send_button" value="Надіслати">
+</form> -->
 
 {% endblock content %}
+
+{% block status_message %}
+
+{% if form.errors %}
+  <div class="alert alert-warning" role="alert">
+    Будь-ласка виправте наступні помилки
+  </div>
+{% endif %}
+
+{{ block.super }}
+
+{% endblock %}

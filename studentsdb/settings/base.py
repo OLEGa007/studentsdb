@@ -142,10 +142,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
 # email settings
-ADMIN_EMAIL = 'admin@studentsdb.com'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT ='587'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+ADMIN_EMAIL = '...'
+EMAIL_HOST = '...'
+EMAIL_PORT ='...'
+EMAIL_HOST_USER = '...'
+EMAIL_HOST_PASSWORD = '...'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False

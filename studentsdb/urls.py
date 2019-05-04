@@ -21,26 +21,30 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .settings import MEDIA_ROOT, DEBUG
 
+from students.views.students import StudentUpdateView, StudentDeleteView
+from students.views.groups import GroupUpdateView, GroupDeleteView
+
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 
 	# Students urls
     url(r'^$', views.students_list, name='students_list'),
     url(r'^add/$', views.students_add, name='students_add'),
-    url(r'^(?P<sid>[0-9]+)/edit/$', views.students_edit, name='students_edit'),
-    url(r'^(?P<sid>[0-9]+)/delete/$', views.students_delete, name='students_delete'),
+    url(r'^(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(), name='students_edit'),
+    url(r'^(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(), name='students_delete'),
 
     # Groups urls
     url(r'^groups/$', views.groups_list, name='groups_list'),
     url(r'^groups/add/$', views.groups_add, name='groups_add'),
-    url(r'^groups/(?P<gid>[0-9]+)/edit/$', views.groups_edit, name='groups_edit'),
-    url(r'^groups/(?P<gid>[0-9]+)/delete/$', views.groups_delete, name='groups_delete'),
+    url(r'^groups/(?P<pk>\d+)/edit/$', GroupUpdateView.as_view(), name='groups_edit'),
+    url(r'^groups/(?P<pk>\d+)/delete/$', GroupDeleteView.as_view(), name='groups_delete'),
 
     #Journal urls
     url(r'^journal/$', views.journal, name='journal'),
 
     #Contact Admin Form
-    url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),
+    # url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),
+    url(r'^contact_admin/$', views.ContactAdmin.as_view(), name='contact_admin'),
 
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

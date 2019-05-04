@@ -1,0 +1,24 @@
+{% extends "students/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block meta_title %}Редагування групи{% endblock meta_title %}
+
+{% block title %}Редагування груп{% endblock title %}
+
+{% block status_message %}
+
+	{% if errors %}
+		<div class="alert alert-warning" role="alert">
+			Будь-ласка, виправте наступні помилки
+		</div>
+  {% endif %}
+
+{% endblock status_message %}
+
+{% block content %}
+
+{% crispy form %}
+
+{% endblock content %}

@@ -5,6 +5,12 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import UpdateView, ListView, DeleteView
+from django.forms import ModelForm, ValidationError
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from crispy_forms.bootstrap import FormActions
 
 from datetime import datetime
 import os
@@ -118,8 +124,62 @@ def students_add(request):
 		# initial form rendered
 		return render(request, 'students/students_add.html', {'groups' : Group.objects.all().order_by('title')})
 
-def students_edit(request, sid):
-	return HttpResponse('student %s edit form' % sid)
+class StudentUpdateForm(ModelForm):
+	class Meta:
+		model = Student
+		fields = '__all__'
 
-def students_delete(request, sid):
-	return HttpResponse('student %s delete form' % sid)
+	def __init__(self, *args, **kwargs):
+		super(StudentUpdateForm, self).__init__(*args, ** kwargs)
+
+		self.helper = FormHelper(self)
+
+		# set form tag attributes
+		self.helper.form_action = reverse('students_edit', kwargs={'pk' : kwargs['instance'].id})
+		self.helper.form_method = 'POST'
+		self.helper.form_class = 'form-horizontal'
+
+		# set form field properties
+		self.helper.help_text_inline = True
+		self.helper.html5_required = True
+		self.helper.label_class = 'col-sm-2 control-label'
+		self.helper.field_class = 'col-sm-10'
+
+		# add buttons
+		self.helper.layout.append(FormActions(
+				Submit('add_button', u'Зберегти', css_class = "btn btn-primary"),
+				Submit('cancel_button', u'Скасувати', css_class = "btn btn-link"),
+			))
+
+	def clean_student_group(self):
+		'''Check if student is a leader in any group. If yes then ensure it's the same as selected group.'''
+		#get group where current student is a leader
+		groups = Group.objects.filter(leader=self.instance)
+		#validate group and raise exception if the selected group is different from
+		# the group where the student is a leader
+		if len(groups) > 0 and self.cleaned_data['student_group'] != groups[0]:
+		    raise ValidationError(u'Студент є старостою іншої групи', code='invalid')
+		#if validation was succesfull we return value of field student_group from the method
+		return self.cleaned_data['student_group']
+
+class StudentUpdateView(UpdateView):
+	model = Student
+	template_name = 'students/students_edit.html'
+	form_class = StudentUpdateForm
+
+	def get_success_url(self):
+		return u'%s?status_message=Студента успішно редаговано!' % reverse('students_list')
+
+	def post(self, request, *args, **kwargs):
+		if request.POST.get('cancel_button') is not None:
+			return HttpResponseRedirect(u'%s?status_message=Редагування студента відмінено' % reverse('students_list'))
+
+		else:
+			return super(StudentUpdateView, self).post(request, *args, **kwargs)
+
+class StudentDeleteView(DeleteView):
+	model = Student
+	template_name = 'students/students_confirm_delete.html'
+
+	def get_success_url(self):
+		return u'%s?status_message=Студента успішно видалено!' % reverse('students_list')

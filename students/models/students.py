@@ -3,16 +3,17 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+
 # Create your models here.
 class Student(models.Model):
     '''Student model'''
 
     def __unicode__(self):
-        return u'%s %s' %(self.first_name, self.last_name)
+        return u'%s %s' % (self.first_name, self.last_name)
 
     class Meta(object):
-        verbose_name=u'Студент'
-        verbose_name_plural=u'Студенти'
+        verbose_name = u'Студент'
+        verbose_name_plural = u'Студенти'
 
     first_name = models.CharField(
         max_length=256,
@@ -49,7 +50,7 @@ class Student(models.Model):
         verbose_name=u"Додаткові нотатки")
 
     student_group = models.ForeignKey('Group',
-        verbose_name=u"Група",
-        blank=False,
-        null=True,
-        on_delete=models.PROTECT)
+                                      verbose_name=u"Група",
+                                      blank=False,
+                                      null=True,
+                                      on_delete=models.PROTECT)

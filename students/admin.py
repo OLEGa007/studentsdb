@@ -6,6 +6,7 @@ from django.contrib import admin
 
 from .models.students import Student
 from .models.groups import Group
+from .models.monthjournal import MonthJournal
 
 
 class StudentFormAdmin(ModelForm):
@@ -46,7 +47,7 @@ class GroupFormAdmin(ModelForm):
         # get students who is members of the group
         students = Student.objects.filter(student_group=self.instance)
         # validate if the leader is a member of current group
-        if self.cleaned_data['leader'] not in students:
+        if self.cleaned_data['leader'] not in students and self.cleaned_data['leader'] is not None:
             raise ValidationError(u'Студент є членом іншої групи',
                                   code='invalid')
         # if validation was succesfull we return value of field student_group
@@ -66,3 +67,4 @@ class GroupAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Group, GroupAdmin)
+admin.site.register(MonthJournal)

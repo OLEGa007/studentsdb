@@ -3,102 +3,102 @@
 <!DOCTYPE html>
 <html lang="uk">
 
-	<head>
-		<meta charset="utf8"/>
-		<title>Сервіс Обліку Студентів - {% block meta_title %}{% endblock meta_title %}</title>
-		<meta name="description"
-			  value="Система Обліку Студентів Навчального Закладу"/>
+    <head>
+        <meta charset="utf8"/>
+        <title>Сервіс Обліку Студентів - {% block meta_title %}{% endblock meta_title %}</title>
+        <meta name="description"
+              value="Система Обліку Студентів Навчального Закладу"/>
 
-		<!-- Include styles -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static "css/main.css" %}">
+        <!-- Include styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static "css/main.css" %}">
 
-		{% block extra_css %}{% endblock extra_css %}
+        {% block extra_css %}{% endblock extra_css %}
 
-	</head>
+    </head>
 
-	<body>
+    <body>
 
-		<!--Start Container-->
-		<div class="container">
+        <!--Start Container-->
+        <div class="container">
 
-			<!--Header-->
-			<div class="row" id="header">
+            <!--Header-->
+            <div class="row" id="header">
 
-				<!--Logo-->
-				<div class="col-xs-8">
-					<h1>Сервіс Обліку Студентів</h1>
-				</div>
+                <!--Logo-->
+                <div class="col-xs-8">
+                    <h1>Сервіс Обліку Студентів</h1>
+                </div>
 
-				<!--Group Selector-->
-				<div class="col-xs-4" id="group-selector">
-					<strong>Група:</strong>
-					<select>
-						<option value="">Усі Студенти</option>
-						<option value="">МтМ - 21, Подоба Віталій (№254)</option>
-						<option value="">МтМ - 22, Корост Андрій (№2123)</option>
-					</select>
-				</div>
+                <!--Group Selector-->
+                <div class="col-xs-4" id="group-selector">
+                    <strong>Група:</strong>
+                    <select>
+                        <option value="">Усі Студенти</option>
+                        <option value="">МтМ - 21, Подоба Віталій (№254)</option>
+                        <option value="">МтМ - 22, Корост Андрій (№2123)</option>
+                    </select>
+                </div>
 
-			</div>
-			<!--End Header-->
+            </div>
+            <!--End Header-->
 
-			<!--Start SubHeader-->
-			<div class="row" id="sub-header">
+            <!--Start SubHeader-->
+            <div class="row" id="sub-header">
 
-				<div class="col-xs-12">
-					<ul class="nav nav-tabs">
-						<li role="presentation" {% url 'students_list' as students_list %} {% if request.path == students_list %} class="active" {% endif %}>
-							<a href="{% url 'students_list' %}">Студенти</a></li>
-						<li role="presentation" {% url 'journal' as journal %} {% if journal in request.path %} class="active" {% endif %}>
-							<a href="{% url 'journal' %}">Відвідування</a></li>
-						<li role="presentation" {% url 'groups_list' as groups_list %} {% if groups_list in request.path %} class="active" {% endif %}>
-							<a href="{% url 'groups_list' %}">Групи</a></li>
-						<li role="presentation" {% url 'contact_admin' as contact_admin %} {% if contact_admin in request.path %} class="active" {% endif %}>
-							<a href="{% url 'contact_admin' %}">Контакт</a></li>
-					</ul>
-				</div>
+                <div class="col-xs-12">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" {% url 'students_list' as students_list %} {% if request.path == students_list %} class="active" {% endif %}>
+                            <a href="{% url 'students_list' %}">Студенти</a></li>
+                        <li role="presentation" {% url 'journal' as journal %} {% if journal in request.path %} class="active" {% endif %}>
+                            <a href="{% url 'journal' %}">Відвідування</a></li>
+                        <li role="presentation" {% url 'groups_list' as groups_list %} {% if groups_list in request.path %} class="active" {% endif %}>
+                            <a href="{% url 'groups_list' %}">Групи</a></li>
+                        <li role="presentation" {% url 'contact_admin' as contact_admin %} {% if contact_admin in request.path %} class="active" {% endif %}>
+                            <a href="{% url 'contact_admin' %}">Контакт</a></li>
+                    </ul>
+                </div>
 
-			</div>
-			<!--End SubHeader-->
+            </div>
+            <!--End SubHeader-->
 
-			<!--Start Main Page Content-->
-			<div class="row" id="content-columns">
+            <!--Start Main Page Content-->
+            <div class="row" id="content-columns">
 
-				<div class="col-xs-12" id="content-column">
+                <div class="col-xs-12" id="content-column">
 
-					<!--Status Message-->
-					{% block status_message %}
-					{% if request.GET.status_message %}
-					<div class="alert alert-warning">
-						{{ request.GET.status_message }}
-					</div>
-					{% endif %}
-					{% endblock %}
+                    <!--Status Message-->
+                    {% block status_message %}
+                    {% if request.GET.status_message %}
+                    <div class="alert alert-warning">
+                        {{ request.GET.status_message }}
+                    </div>
+                    {% endif %}
+                    {% endblock %}
 
-					<h2>{% block title %}{% endblock title %}</h2>
-					{% block content %}{% endblock content %}
+                    <h2>{% block title %}{% endblock title %}</h2>
+                    {% block content %}{% endblock content %}
 
-				</div>
+                </div>
 
-			</div>
-			<!--End Main Page Content-->
+            </div>
+            <!--End Main Page Content-->
 
-			<!--Start Footer-->
-			<div class="row" id="footer">
-				<div class="col-xs-12">
-					&copy; 2014 Сервіс Обліку Студентів
-				</div>
-			</div>
-			<!--End Footer-->
+            <!--Start Footer-->
+            <div class="row" id="footer">
+                <div class="col-xs-12">
+                    &copy; 2014 Сервіс Обліку Студентів
+                </div>
+            </div>
+            <!--End Footer-->
 
-		</div>
-		<!--End Container-->
+        </div>
+        <!--End Container-->
 
-		<!-- Java Script Section -->
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		{% block extra_js %}{% endblock extra_js %}
+        <!-- Java Script Section -->
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        {% block extra_js %}{% endblock extra_js %}
 
-	</body>
+    </body>
 </html>

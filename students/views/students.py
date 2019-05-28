@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpRequest
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import UpdateView, ListView, DeleteView
+from django.views.generic import UpdateView, DeleteView
 from django.forms import ModelForm, ValidationError
 
 from crispy_forms.helper import FormHelper
@@ -13,10 +13,10 @@ from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import FormActions
 
 from datetime import datetime
-import os
 
 from ..models.students import Student
 from ..models.groups import Group
+from ..util import paginate
 
 
 def students_list(request):
@@ -32,19 +32,8 @@ def students_list(request):
         students = students.order_by('last_name')
 
     # paginate students
-    paginator = Paginator(students, 3)
-    page = request.GET.get('page')
-    try:
-        students = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer delivers first page
-        students = paginator.page(1)
-    except EmptyPage:
-        # If page is out or page range (e.g. 9999) delivers the last page
-        students = paginator.page(paginator.last_page)
-
-    return render(request, 'students/students_list.html',
-                  {'students': students}, {order_by: "last_name"})
+    context = paginate(students, 5, request, {}, var_name='students')
+    return render(request, 'students/students_list.html', context)
 
 
 def students_add(request):
@@ -78,8 +67,8 @@ def students_add(request):
                 try:
                     datetime.strptime(birthday, '%Y-%m-%d')
                 except Exception:
-                    errors['birthday'] =\
-                          u"Введіть коректний формат дати (напр. 1984-12-30)"
+                    errors['birthday'] = u"Введіть коректний формат дати\
+                                            (напр. 1984-12-30)"
                 else:
                     data['birthday'] = birthday
 
@@ -163,11 +152,11 @@ class StudentUpdateForm(ModelForm):
 
         # add buttons
         self.helper.layout.append(FormActions(
-                Submit('add_button', u'Зберегти',
-                       css_class="btn btn-primary"),
-                Submit('cancel_button', u'Скасувати',
-                       css_class="btn btn-link"),
-            ))
+                                  Submit('add_button', u'Зберегти',
+                                         css_class="btn btn-primary"),
+                                  Submit('cancel_button', u'Скасувати',
+                                         css_class="btn btn-link"),
+                                  ))
 
     def clean_student_group(self):
         '''Check if student is a leader in any group.
@@ -201,7 +190,7 @@ class StudentUpdateView(UpdateView):
 
         else:
             return super(StudentUpdateView, self).\
-                   post(request, *args, **kwargs)
+                post(request, *args, **kwargs)
 
 
 class StudentDeleteView(DeleteView):

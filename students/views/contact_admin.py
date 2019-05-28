@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+
 from django import forms
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
+
 from django.core.urlresolvers import reverse
 from django.views.generic.edit import FormView
 

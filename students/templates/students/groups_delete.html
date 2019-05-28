@@ -1,0 +1,61 @@
+{% extends "students/base.html" %}
+
+{% load static %}
+
+{% block meta_title %}Видалення групи{% endblock meta_title %}
+
+{% block title %}Видалення груп {% endblock title %}
+
+{% block status_message %}
+
+    {% if errors %}
+        <div class="alert alert-warning" role="alert">
+            Будь-ласка, виправте наступні помилки
+        </div>
+  {% endif %}
+
+{% endblock status_message %}
+
+{% block content %}
+
+{% if students %}
+
+<div class="alert alert-warning">
+    <p>Не можна видалити не порожню групу</p>
+</div>
+
+<p>До групи {{group}} входять наступні студенти:</p>
+<ul>
+    {% for student in students %}
+    <li>{{student}}</li>
+    {% endfor %}
+</ul>
+
+<form action="." method="post" enctype="multipart/form-data" role="form" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <button class="btn btn-link" type="submit" name="cancel_button">Скасувати</button>
+        </div>
+    </div>
+</form>
+
+{% else %}
+
+<p>Ви дійсно хочете видалити групу {{group}}?</p>
+
+<form action="." method="post" enctype="multipart/form-data" role="form" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <input class="btn btn-primary" type="submit" name="del_button" value="Видалити">
+            <button class="btn btn-link" type="submit" name="cancel_button">Скасувати</button>
+        </div>
+    </div>
+</form>
+
+{% endif %}
+
+{% endblock content %}

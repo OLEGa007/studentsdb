@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 from .settings import MEDIA_ROOT, DEBUG
 
 from students.views.students import StudentUpdateView, StudentDeleteView
-from students.views.groups import GroupUpdateView, GroupDeleteView
+from students.views.groups import GroupUpdateView, groups_delete, GroupAddView
+from students.views.journal import JournalView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -37,21 +38,21 @@ urlpatterns = [
 
     # Groups urls
     url(r'^groups/$', views.groups_list, name='groups_list'),
-    url(r'^groups/add/$', views.groups_add, name='groups_add'),
+    url(r'^groups/add/$', GroupAddView.as_view(), name='groups_add'),
     url(r'^groups/(?P<pk>\d+)/edit/$', GroupUpdateView.as_view(),\
         name='groups_edit'),
-    url(r'^groups/(?P<pk>\d+)/delete/$', GroupDeleteView.as_view(),
+    url(r'^groups/(?P<pk>\d+)/delete/$', views.groups_delete,
         name='groups_delete'),
 
     # Journal urls
-    url(r'^journal/$', views.journal, name='journal'),
+    url(r'^journal/$', JournalView.as_view(), name='journal'),
 
     # Contact Admin Form
     # url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),
     url(r'^contact_admin/$', views.ContactAdmin.as_view(),
         name='contact_admin'),
 
-    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if DEBUG:
     # serve files from media folder

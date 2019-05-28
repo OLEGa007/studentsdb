@@ -2,183 +2,89 @@
 
 {% load static %}
 
-{% block meta_title %}Групи{% endblock meta_title %}
+{% block meta_title %}Облік відвідування{% endblock meta_title %}
 
-{% block title %}Список груп{% endblock title %}
+{% block title %}Облік відвідування{% endblock title %}
 
 {% block content %}
-<!--Start Main Page Content-->
-<div class="row" id="content-columns">
 
-	<div class="col-xs-12" id="content-column">
+{% if not students %}
 
-		<h2>Облік Відвідування</h2>
-
-		<nav aria-label="Month Navigation">
-			<ul class="month-navigation">
-				<li>
-					<a href="#" aria-label="Previous">
-						<span aria-hidden="true">&larr;</span>
-					</a>
-				</li>
-				<li class="active">Жовтень 2014</li>
-				<li>
-					<a href="#" aria-label="Next">
-						<span aria-hidden="true">&rarr;</span>
-					</a>
-				</li>
-			</ul>
-		</nav>
-
-		<table class="table table-bordered centered">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Студент</th>
-					<th>Ср<br />1</th>
-					<th>Чт<br />2</th>
-					<th>Пт<br />3</th>
-					<th>Сб<br />4</th>
-					<th>Нд<br />5</th>
-					<th>Пн<br />6</th>
-					<th>Вт<br />7</th>
-					<th>Ср<br />8</th>
-					<th>Чт<br />9</th>
-					<th>Пт<br />10</th>
-					<th>Сб<br />11</th>
-					<th>Нд<br />12</th>
-					<th>Пн<br />13</th>
-					<th>Вт<br />14</th>
-					<th>Ср<br />15</th>
-					<th>Чт<br />16</th>
-					<th>Пт<br />17</th>
-					<th>Сб<br />18</th>
-					<th>Нд<br />19</th>
-					<th>Пн<br />20</th>
-					<th>Вт<br />21</th>
-					<th>Ср<br />22</th>
-					<th>Чт<br />23</th>
-					<th>Пт<br />24</th>
-					<th>Сб<br />25</th>
-					<th>Нд<br />26</th>
-					<th>Пн<br />27</th>
-					<th>Вт<br />28</th>
-					<th>Ср<br />29</th>
-					<th>Чт<br />30</th>
-					<th>Пт<br />31</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td style="text-align:left;"><a title="Редагувати" href="#">Подоба Віталій</a></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-				</tr>
-										<tr>
-					<td>2</td>
-					<td style="text-align:left;"><a title="Редагувати" href="#">Корост Андрій</a></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-				</tr>
-										<tr>
-					<td>3</td>
-					<td style="text-align:left;"><a title="Редагувати" href="#">Притула Тарас</a></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-					<td><input type="checkbox" name="Відвідування"></td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
-
+<div class='alert alert_warning'>
+    Поки немає жодного студента в базі. Будь-ласка
+    <a href='{% url "students_add" %}'> додайте</a> першого.
 </div>
-<!--End Main Page Content-->
+
+{% else %}
+
+<p id='journal-nav' class='text-center'>
+    <a href='?month={{ prev_month }}' title='Попередній місяць'>&larr;</a>
+    <!-- TODO: translate month name -->
+    <strong> {{ month_verbose }} {{ year }} </strong>
+    <a href='?month={{ next_month }}' title='Наступний місяць'>&rarr;</a>
+</p>
+
+<table class='table table-hover table-striped tible-bordered'
+    id='students-journal'>
+
+    <thead>
+        <tr class='header'>
+            <th class='num'>#</th>
+            <th class='name'>Студент</th>
+            {% for day in month_header %}
+            <th class='day-header'>
+                <!-- TODO: translate day name -->
+                {{ day.verbose }}
+                <br />
+                {{ day.day }}
+            </th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% csrf_token %}
+
+        {% for student in students %}
+        <tr>
+            <td>
+                {% if is_paginated %}
+                    {{ page_obj.start_index|add:forloop.counter|add:"-1" }}
+                {% else %}
+                    {{ forloop.counter }}
+                {% endif %}
+            </td>
+
+            <td>
+                <a title='Редагувати' target='_blank'
+                    href='{% url 'students_edit' student.id %}'>
+                    {{ student.fullname }}
+                </a>
+            </td>
+
+            {% for day in student.days %}
+            <td class='day-box'>
+                <input type='checkbox' data-student-id='{{ student.id }}'
+                            data-date='{{ day.date }}'
+                            data-url='{{ student.update_url }}'
+                            value='1'
+                            {% if day.present %}
+                            checked='checked'
+                            {% endif %} />
+            </td>
+            {% endfor %}
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endif %}
+
+{% with object_list=students %}
+    {% include 'students/pagination.html' %}
+{% endwith %}
+
 {% endblock content %}

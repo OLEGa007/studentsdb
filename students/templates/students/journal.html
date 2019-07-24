@@ -1,6 +1,6 @@
 {% extends "students/base.html" %}
 
-{% load static %}
+{% load static from staticfiles %}
 
 {% block meta_title %}Облік відвідування{% endblock meta_title %}
 
@@ -17,6 +17,11 @@
 
 {% else %}
 
+<div class="alert alert-warning">
+    Зміни в журнал зберігаються автоматично при кожному кліку в клітинці таблиці.
+    <span id="ajax-progress-indicator">Йде збереження...</span>
+</div>
+
 <p id='journal-nav' class='text-center'>
     <a href='?month={{ prev_month }}' title='Попередній місяць'>&larr;</a>
     <!-- TODO: translate month name -->
@@ -24,7 +29,7 @@
     <a href='?month={{ next_month }}' title='Наступний місяць'>&rarr;</a>
 </p>
 
-<table class='table table-hover table-striped tible-bordered'
+<table class='table table-hover table-striped table-bordered'
     id='students-journal'>
 
     <thead>

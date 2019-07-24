@@ -59,8 +59,8 @@
 					<img height="30" width="30" src="{% static "img/user.png" %}" class="img-circle">
 				{% endif %}
 			</td>
-			<td><a href="{% url 'students_edit' student.id %}">{{ student.last_name }}</td>
-			<td><a href="{% url 'students_edit' student.id %}">{{ student.first_name }}</td>
+			<td><a href="{% url 'students_edit' student.id %}" class="student-edit-form-link">{{ student.last_name }}</td>
+			<td><a href="{% url 'students_edit' student.id %}" class="student-edit-form-link">{{ student.first_name }}</td>
 			<td>{{student.ticket}}</td>
 			<td>
 				<div class="dropdown">
@@ -70,10 +70,10 @@
 					</button>
 					<ul class="dropdown-menu" role="menu">
 						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="{% url 'journal' %}">Відвідування</a>
+							<a role="menuitem" tabindex="-1" href="{% url 'journal' student.id %}">Відвідування</a>
 						</li>
 						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="{% url 'students_edit' student.id %}">Редагувати</a>
+							<a role="menuitem" tabindex="-1" href="{% url 'students_edit' student.id %}" class="student-edit-form-link">Редагувати</a>
 						</li>
 						<li role="presentation">
 							<a role="menuitem" tabindex="-1" href="{% url 'students_delete' student.id %}">Видалити</a>

@@ -37,7 +37,7 @@
 	<div class="form-group" {% if errors.birthday %}has-errors{% endif %}>
 		<label class="col-sm-2 control-label" for="birthday">День народження*</label>
 		<div class="col-sm-10">
-			<input class="form-control" type="text" name="birthday" value="{{ request.POST.birthday }}" id="birthday" placeholder="Наприклад 1984-12-30"/>
+			<input class="dateinput" type="text" name="birthday" value="{{ request.POST.birthday }}" id="birthday" placeholder="Наприклад 1984-12-30"/>
 			<span class="help-block">{{ errors.birthday }}</span>
 		</div>
 	</div>

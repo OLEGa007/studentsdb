@@ -14,9 +14,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 # from django.conf import global_settings
 
-'''TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS +
-("django.core.context_processors.request",
-"studentsdb.context_processors.students_proc",)'''
+# TEMPLATE_CONTEXT_PROCESSORS = \
+#     global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+#         "django.core.context_processors.request",
+#         "students.context_processors.groups_processor",
+#         "studentsdb.context_processors.students_proc",
+#     )
 
 PORTAL_URL = 'http://localhost:8000'
 
@@ -32,6 +35,53 @@ SECRET_KEY = '...'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+LOG_FILE = os.path.join(BASE_DIR, 'studentsdb.log')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'students.signals': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+        'students.views.contact_admin': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        }
+    }
+}
 
 ALLOWED_HOSTS = []
 
@@ -75,6 +125,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'studentsdb.context_processors.students_proc',
+                'students.context_processors.groups_processor',
             ],
         },
     },

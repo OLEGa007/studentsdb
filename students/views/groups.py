@@ -14,11 +14,18 @@ from crispy_forms.bootstrap import FormActions
 
 from ..models.groups import Group
 from ..models.students import Student
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 
 def groups_list(request):
-    groups = Group.objects.all()
+    # check if we need to show only one group
+    current_group = get_current_group(request)
+    print(current_group)
+    if current_group:
+        groups = Group.objects.filter(title=current_group.title)
+    else:
+        # otherwise show all students
+        groups = Group.objects.all()
 
     # try to order group Listing
     order_by = request.GET.get('order_by', '')

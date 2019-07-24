@@ -68,3 +68,15 @@ ul.month-navigation li {
 textarea, select, input {
 	max-width: 300px;
 }
+
+/* Journal Tabel styles */
+td.day-box,
+th.day-header {
+	padding: 4px !important;
+	vertical-align: middle !important;
+	text-align: center;
+}
+
+#ajax-progress-indicator {
+	display: none;
+}

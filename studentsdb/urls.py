@@ -45,7 +45,7 @@ urlpatterns = [
         name='groups_delete'),
 
     # Journal urls
-    url(r'^journal/$', JournalView.as_view(), name='journal'),
+    url(r'^journal/(?P<pk>\d+)?/?$', JournalView.as_view(), name='journal'),
 
     # Contact Admin Form
     # url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),

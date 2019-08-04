@@ -1,11 +1,13 @@
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="uk">
 
   <head>
     <meta charset="utf8"/>
-    <title>Демо Форма</title>
+    <title>{% trans "Form Demo" %}</title>
     <meta name="description"
-        value="Система Обліку Студентів Навчального Закладу"/>
+        value="{% trans "System of Accounting of Students of Educational Institution" %}"/>
 
     <!-- Include styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -18,31 +20,31 @@
       <input type="hidden" name="student_id" value="27"/>
 
       <div>
-        <label for="first_name">Ваше імʼя</label>
+        <label for="first_name">{% trans "Your name" %}</label>
         <input type="text" name="first_name" value="" id="first_name"/>
       </div>
 
       <div>
-        <label for="graduated">Закінчили навчання?</label>
+        <label for="graduated">{% trans "Have you finished your studies?" %}</label>
         <input type="checkbox" checked="1" name="graduated" value="1" id="graduated"/>
       </div>
 
       <div>
-        <label for="gender">Ваша стать</label>
+        <label for="gender">{% trans "Your gender" %}</label>
         <input type="radio" name="gender" value="male" id="gender"/>
         <input type="radio" name="genger" value="female"  id="gender"/>
       </div>
 
       <div>
-        <label for="age">Ваш вік</label>
+        <label for="age">{% trans "Your age" %}</label>
         <select name="age" id="age">
-          <option value="">Будь-ласка виберіть ваш вік</option>
-          <option value="10">Більше ніж 10</option>
-          <option value="20">Більше ніж 20</option>
+          <option value="">{% trans "Please select your age" %}</option>
+          <option value="10">{% trans "More than 10" %}</option>
+          <option value="20">{% trans "More than 20" %}</option>
         </select>
       </div>
 
-      <input type="submit" name="save_button" value="Зберегти">
+      <input type="submit" name="save_button" value="{% trans "Save" %}">
 
     </form>
 

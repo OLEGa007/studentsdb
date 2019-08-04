@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.shortcuts import render
@@ -7,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import UpdateView, DeleteView, CreateView
 from django.forms import ModelForm, ValidationError
+from django.utils.translation import ugettext as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -20,7 +20,6 @@ from ..util import paginate, get_current_group
 def groups_list(request):
     # check if we need to show only one group
     current_group = get_current_group(request)
-    print(current_group)
     if current_group:
         groups = Group.objects.filter(title=current_group.title)
     else:
@@ -45,15 +44,15 @@ class GroupAddForm(ModelForm):
         model = Group
         fields = '__all__'
 
-    def __init__(self, *arg, **kwargs):
-        super(GroupAddForm, self).__init__(*arg, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(GroupAddForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
 
         # set form tag attributes
         self.helper.form_action = reverse('groups_add')
         self.helper.form_method = 'POST'
-        self.helper.form_class = 'form_horizontal'
+        self.helper.form_class = 'form-horizontal'
 
         # set form field properties
         self.helper.help_text_inline = True
@@ -63,29 +62,27 @@ class GroupAddForm(ModelForm):
 
         # add buttons
         self.helper.layout.append(FormActions(
-            Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
-            Submit('cancel_button', u'Скасувати', css_class="btn btn-link"),
-        ))
-
+            Submit('add_button', _(u'Save'), css_class="btn btn-primary"),
+            Submit('cancel_button', _(u'Cancel'), css_class="btn btn-link",
+                   formnovalidate='formnovalidate')))
 
 
 class GroupAddView(CreateView):
     model = Group
-    # fields = '__all__'
     template_name = 'students/groups_add.html'
     form_class = GroupAddForm
 
     def get_success_url(self):
-        return u'%s?status_message=Групу успішно додано!'\
-                                    % reverse('groups_list')
+        return (u'%s?status_message=%s' % (reverse('groups_list'),
+                                           _(u"Group successfully added!")))
 
-    def post(self, request, *arg, **kwargs):
+    def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button'):
-            return HttpResponseRedirect(u'%s?status_message=Додавання\
-                                        групи відмінно'
-                                        % reverse('groups_list'))
+            return HttpResponseRedirect(u'%s?status_message=%s' %
+                                        (reverse('groups_list'),
+                                         _(u"Adding group canceled")))
         else:
-            return super(GroupAddView, self).post(request, *arg, **kwargs)
+            return super(GroupAddView, self).post(request, *args, **kwargs)
 
 
 class GroupUpdateForm(ModelForm):
@@ -112,9 +109,9 @@ class GroupUpdateForm(ModelForm):
 
         # add buttons
         self.helper.layout.append(FormActions(
-            Submit('add_button', u'Зберегти', css_class="btn btn-primary"),
-            Submit('cancel_button', u'Скасувати', css_class="btn btn-link"),
-        ))
+            Submit('add_button', _(u'Save'), css_class="btn btn-primary"),
+            Submit('cancel_button', _(u'Cancel'), css_class="btn btn-link",
+                   formnovalidate='formnovalidate')))
 
     def clean_leader(self):
         '''Check if the selected leader is not a member of other groups.'''
@@ -123,7 +120,7 @@ class GroupUpdateForm(ModelForm):
         # validate if the leader is a member of current group
         if self.cleaned_data['leader'] not in students:
             raise ValidationError(
-                u'Студент є членом іншої групи', code='invalid')
+                _(u'The student is a member of another group'), code='invalid')
         '''if validation was succesfull we return value of field student_group
             from the method'''
         return self.cleaned_data['leader']
@@ -135,13 +132,14 @@ class GroupUpdateView(UpdateView):
     form_class = GroupUpdateForm
 
     def get_success_url(self):
-        return(u'%s?status_message=Групу успішно редаговано!' %
-               reverse('groups_list'))
+        return u'%s?status_message=%s' % (reverse('groups_list'),
+                                          _(u"Group successfully edited!"))
 
     def post(self, request, *args, **kwargs):
         if request.POST.get('cancel_button') is not None:
-            return HttpResponseRedirect(u'%s?status_message=Редагування групи\
-                                        відмінено!' % reverse('groups_list'))
+            return HttpResponseRedirect(u'%s?status_message=%s' %
+                                        (reverse('groups_list'),
+                                         _(u"Group Edit Canceled!")))
         else:
             return super(GroupUpdateView, self).post(request, *args, **kwargs)
 
@@ -152,17 +150,18 @@ def groups_delete(request, pk):
     if request.method == "POST":
         if request.POST.get('del_button') is not None:
             if len(students) > 0:
-                return HttpResponseRedirect(u'%s?status_message=Групу не \
-                                            можна видалити оскільки до неї\
-                                             входять студенти'
-                                            % reverse('groups_list'))
+                return HttpResponseRedirect(u'%s?status_message=%s' %
+                                            (reverse('groups_list'),
+                                             _(u"The group cannot be deleted because it includes students")))
             else:
                 group.delete()
-                return HttpResponseRedirect(u'%s?status_message=Групу видалено'
-                                            % reverse('groups_list'))
+                return HttpResponseRedirect(u'%s?status_message=%s' %
+                                            (reverse('groups_list'),
+                                             _(u"Group deleted")))
         else:
-            return HttpResponseRedirect(u'%s?status_message=Видалення групи\
-                                        відмінено' % reverse('groups_list'))
+            return HttpResponseRedirect(u'%s?status_message=%s' %
+                                        (reverse('groups_list'),
+                                         _(u"Group deletion canceled")))
     else:
         return render(request, 'students/groups_delete.html',
                       {'group': group[0].title, 'students': students})

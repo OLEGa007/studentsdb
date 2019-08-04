@@ -16,17 +16,20 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from students import views
-from students import models
 from django.conf import settings
 from django.conf.urls.static import static
-from .settings import MEDIA_ROOT, DEBUG
+from django.views.i18n import JavaScriptCatalog
+from .settings import DEBUG
 
 from students.views.students import StudentUpdateView, StudentDeleteView
-from students.views.groups import GroupUpdateView, groups_delete, GroupAddView
+from students.views.groups import GroupUpdateView, GroupAddView
 from students.views.journal import JournalView
+from students.views.contact_admin import ContactAdmin
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^jsi18n/.js$', JavaScriptCatalog.as_view(packages=['students']), name='javascript_catalog'),
 
     # Students urls
     url(r'^$', views.students_list, name='students_list'),
@@ -49,8 +52,7 @@ urlpatterns = [
 
     # Contact Admin Form
     # url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),
-    url(r'^contact_admin/$', views.ContactAdmin.as_view(),
-        name='contact_admin'),
+    url(r'^contact_admin/$', ContactAdmin.as_view(), name='contact_admin'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -1,32 +1,33 @@
 {% extends "students/base.html" %}
 
+{% load i18n %}
 {% load static from staticfiles %}
 
-{% block meta_title %}Облік відвідування{% endblock meta_title %}
+{% block meta_title %}{% trans "Attendance record" %}{% endblock meta_title %}
 
-{% block title %}Облік відвідування{% endblock title %}
+{% block title %}{% trans "Attendance record" %}{% endblock title %}
 
 {% block content %}
 
 {% if not students %}
 
 <div class='alert alert_warning'>
-    Поки немає жодного студента в базі. Будь-ласка
-    <a href='{% url "students_add" %}'> додайте</a> першого.
+    {% trans "There are no students in the database yet. Please" %}
+    <a href='{% url "students_add" %}'> {% trans "add" %}</a> {% trans "the first" %}.
 </div>
 
 {% else %}
 
 <div class="alert alert-warning">
-    Зміни в журнал зберігаються автоматично при кожному кліку в клітинці таблиці.
-    <span id="ajax-progress-indicator">Йде збереження...</span>
+    {% trans "Changes to the log are automatically saved every time a table cell is clicked." %}
+    <span id="ajax-progress-indicator">{% trans "Saving ..." %}</span>
 </div>
 
 <p id='journal-nav' class='text-center'>
-    <a href='?month={{ prev_month }}' title='Попередній місяць'>&larr;</a>
+    <a href='?month={{ prev_month }}' title='{% trans "Previous month" %}'>&larr;</a>
     <!-- TODO: translate month name -->
-    <strong> {{ month_verbose }} {{ year }} </strong>
-    <a href='?month={{ next_month }}' title='Наступний місяць'>&rarr;</a>
+    <strong> {% trans month_verbose %} {{ year }} </strong>
+    <a href='?month={{ next_month }}' title='{% trans "Next month" %}'>&rarr;</a>
 </p>
 
 <table class='table table-hover table-striped table-bordered'
@@ -35,11 +36,10 @@
     <thead>
         <tr class='header'>
             <th class='num'>#</th>
-            <th class='name'>Студент</th>
+            <th class='name'>{% trans "Student" %}</th>
             {% for day in month_header %}
             <th class='day-header'>
-                <!-- TODO: translate day name -->
-                {{ day.verbose }}
+                {% trans day.verbose %}
                 <br />
                 {{ day.day }}
             </th>
@@ -62,7 +62,7 @@
             </td>
 
             <td>
-                <a title='Редагувати' target='_blank'
+                <a title='{% trans "Edit" %}' target='_blank'
                     href='{% url 'students_edit' student.id %}'>
                     {{ student.fullname }}
                 </a>

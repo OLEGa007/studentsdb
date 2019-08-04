@@ -1,16 +1,17 @@
 {% extends "students/base.html" %}
 
+{% load i18n %}
 {% load static %}
 
-{% block meta_title %}Видалення групи{% endblock meta_title %}
+{% block meta_title %}{% trans "Delete Group" %}{% endblock meta_title %}
 
-{% block title %}Видалення груп {% endblock title %}
+{% block title %}{% trans "Delete Group" %}{% endblock title %}
 
 {% block status_message %}
 
     {% if errors %}
         <div class="alert alert-warning" role="alert">
-            Будь-ласка, виправте наступні помилки
+            {% trans "Please correct the following errors" %}
         </div>
   {% endif %}
 
@@ -21,10 +22,10 @@
 {% if students %}
 
 <div class="alert alert-warning">
-    <p>Не можна видалити не порожню групу</p>
+    <p>{% trans "Not empty group could not be deleted" %}</p>
 </div>
 
-<p>До групи {{group}} входять наступні студенти:</p>
+<p>{% blocktrans %}The group "{{group}}" includes next students: {% endblocktrans %}</p>
 <ul>
     {% for student in students %}
     <li>{{student}}</li>
@@ -36,14 +37,14 @@
     <div class="form-group">
         <label class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
-            <button class="btn btn-link" type="submit" name="cancel_button">Скасувати</button>
+            <button class="btn btn-link" type="submit" name="cancel_button">{% trans "Cancel" %}</button>
         </div>
     </div>
 </form>
 
 {% else %}
 
-<p>Ви дійсно хочете видалити групу {{group}}?</p>
+<p>{% blocktrans %}Do you really want to delete group: "{{group}}"?{% endblocktrans %}</p>
 
 <form action="." method="post" enctype="multipart/form-data" role="form" class="form-horizontal">
     {% csrf_token %}
@@ -51,7 +52,7 @@
         <label class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
             <input class="btn btn-primary" type="submit" name="del_button" value="Видалити">
-            <button class="btn btn-link" type="submit" name="cancel_button">Скасувати</button>
+            <button class="btn btn-link" type="submit" name="cancel_button">{% trans "Cancel" %}</button>
         </div>
     </div>
 </form>

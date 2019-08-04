@@ -96,7 +96,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'registration',
     'students',
+    'stud_auth',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -209,3 +211,6 @@ EMAIL_HOST_USER = '...'
 EMAIL_HOST_PASSWORD = '...'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+# registration settings
+REGISTRATION_OPEN = True

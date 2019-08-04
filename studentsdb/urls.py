@@ -13,12 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from students import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.i18n import JavaScriptCatalog
+from django.contrib.auth import views as auth_views
+from django.views.generic.base import RedirectView
+from django_registration.backends.one_step.views import RegistrationView
+
 from .settings import DEBUG
 
 from students.views.students import StudentUpdateView, StudentDeleteView
@@ -54,6 +58,21 @@ urlpatterns = [
     # url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),
     url(r'^contact_admin/$', ContactAdmin.as_view(), name='contact_admin'),
 
+    # User Related urls
+    url(r'^users/', include('django.contrib.auth.urls')),
+    url(r'^users/register/',
+        RegistrationView.as_view(success_url='students_list'),
+        name='django_registration_register'),
+    url(r'users/logout/$',
+        auth_views.logout,
+        kwargs={'next_page': 'students_list'},
+        name='auth_logout'),
+    url(r'register/complete/$',
+        RedirectView.as_view(pattern_name='students_list'),
+        name='registration_complete'),
+    url(r'users/',
+        include('django_registration.backends.one_step.urls',
+                namespace='users')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if DEBUG:

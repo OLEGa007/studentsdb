@@ -89,6 +89,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'stud_auth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -98,7 +100,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'registration',
     'students',
-    'stud_auth',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -214,3 +215,8 @@ EMAIL_USE_SSL = False
 
 # registration settings
 REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may,
+                             # of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
+
+SITE_ID = 2

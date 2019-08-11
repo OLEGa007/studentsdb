@@ -20,12 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.i18n import JavaScriptCatalog
 from django.contrib.auth import views as auth_views
-from django.views.generic.base import RedirectView
+from django.contrib.auth.decorators import login_required
+from django.views.generic.base import RedirectView,TemplateView
 
 from .settings import DEBUG
 
 from students.views.students import StudentUpdateView, StudentDeleteView
-from students.views.groups import GroupUpdateView, GroupAddView
+from students.views.groups import GroupUpdateView, GroupAddView, groups_list, groups_delete
 from students.views.journal import JournalView
 from students.views.contact_admin import ContactAdmin
 
@@ -43,21 +44,27 @@ urlpatterns = [
         name='students_delete'),
 
     # Groups urls
-    url(r'^groups/$', views.groups_list, name='groups_list'),
-    url(r'^groups/add/$', GroupAddView.as_view(), name='groups_add'),
-    url(r'^groups/(?P<pk>\d+)/edit/$', GroupUpdateView.as_view(),\
+    url(r'^groups/$', login_required(groups_list), name='groups_list'),
+    url(r'^groups/add/$', login_required(GroupAddView.as_view()),
+        name='groups_add'),
+    url(r'^groups/(?P<pk>\d+)/edit/$',
+        login_required(GroupUpdateView.as_view()),
         name='groups_edit'),
-    url(r'^groups/(?P<pk>\d+)/delete/$', views.groups_delete,
+    url(r'^groups/(?P<pk>\d+)/delete/$', login_required(groups_delete),
         name='groups_delete'),
 
     # Journal urls
-    url(r'^journal/(?P<pk>\d+)?/?$', JournalView.as_view(), name='journal'),
+    url(r'^journal/(?P<pk>\d+)?/?$', login_required(JournalView.as_view()), name='journal'),
 
     # Contact Admin Form
     # url(r'^contact_admin/$', views.contact_admin, name='contact_admin'),
     url(r'^contact_admin/$', ContactAdmin.as_view(), name='contact_admin'),
 
     # User Related urls
+    url(r'^users/profile/$',
+        login_required(TemplateView.as_view(
+                        template_name='registration/profile.html')),
+        name='profile'),
     url(r'^users/logout/$',
         auth_views.logout,
         kwargs={'next_page': 'students_list'},
@@ -69,6 +76,9 @@ urlpatterns = [
     url(r'^users/',
         include('registration.backends.simple.urls',
                 namespace='users')),
+
+    # Social Auth related urls
+    url(r'^social/', include('social_django.urls', namespace='social')),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if DEBUG:

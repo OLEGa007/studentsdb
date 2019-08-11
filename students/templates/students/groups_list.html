@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load static %}
+{% load pagenav %}
 
 {% block meta_title %}{% trans "Groups" %}{% endblock meta_title %}
 
@@ -68,7 +69,7 @@
     </tbody>
 </table>
 
-{% include 'students/pagination.html' %}
+{% pagenav groups is_paginated paginator %}
 
 <!--End Main Page Content-->
 {% endblock content %}

@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load static from staticfiles %}
+{% load pagenav %}
 
 {% block meta_title %}{% trans "Attendance record" %}{% endblock meta_title %}
 
@@ -88,8 +89,6 @@
 
 {% endif %}
 
-{% with object_list=students %}
-    {% include 'students/pagination.html' %}
-{% endwith %}
+{% pagenav students is_paginated paginator %}
 
 {% endblock content %}

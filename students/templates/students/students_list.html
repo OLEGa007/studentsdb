@@ -2,14 +2,17 @@
 
 {% load i18n %}
 {% load static %}
+{% load pagenav %}
 
 {% block meta_title %}{% trans "Students" %}{% endblock meta_title %}
 
 {% block title %}{% trans "Students List" %}{% endblock title %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <!--Add Student Button-->
 <a class="btn btn-primary" href="{% url 'students_add' %}">{% trans "Add Student" %}</a>
+{% endif %}
 
 <!--Start Student Listing-->
 <table class="table table-hover table-striped">
@@ -37,7 +40,9 @@
 				{% trans "Ticket #" %} {%  if order_by == "ticket" and reverse != "1" %}&uarr;
 				{% elif order_by == "ticket" and reverse == "1" %}&darr;
 				{% endif %}</a></th>
+			{% if user.is_authenticated %}
 			<th>{% trans "Actions" %}</th>
+			{% endif %}
 		</tr>
 	</thead>
 	{% endwith %}
@@ -64,6 +69,7 @@
 			<td><a href="{% url 'students_edit' student.id %}" class="student-edit-form-link">{{ student.first_name }}</td>
 			<td>{{student.ticket}}</td>
 			<td>
+				{% if user.is_authenticated %}
 				<div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 						{% trans "Action" %}
@@ -81,15 +87,14 @@
 						</li>
 					</ul>
 				</div>
+				{% endif %}
 			</td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
 
-{% with object_list=students %}
-    {% include 'students/pagination.html' %}
-{% endwith %}
+{% pagenav students is_paginated paginator %}
 <!--End Main Page Content-->
 
 {% endblock content %}

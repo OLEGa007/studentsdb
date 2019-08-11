@@ -97,14 +97,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'crispy_forms',
     'registration',
     'students',
+    'sslserver',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -113,7 +115,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    'middleware.RequestTimeMiddleware',
+)
 
 ROOT_URLCONF = 'studentsdb.urls'
 
@@ -128,6 +131,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
                 'studentsdb.context_processors.students_proc',
                 'students.context_processors.groups_processor',
             ],
@@ -175,6 +180,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1114322505623145'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c3a2501379c48a55d02c75faf92c1ea9'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -214,6 +228,8 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 # registration settings
+LOGIN_URL = 'users:auth_login'
+LOGOUT_URL = 'users:auth_logout'
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may,
                              # of course, use a different value.

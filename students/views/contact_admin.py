@@ -6,6 +6,8 @@ from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.views.generic.edit import FormView
 from django.utils.translation import ugettext as _
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -49,6 +51,10 @@ class ContactAdmin(FormView):
     form_class = ContactForm
     message = _(u'The message was sent successfully')
 
+    @method_decorator(permission_required('auth.add_user'))
+    def dispatch(self, *args, **kwargs):
+        return super(ContactAdmin, self).dispatch(*args, **kwargs)
+
     def get_success_url(self):
         return u'%s?status_message=%s' % (reverse('contact_admin'),
                                           _(u"The message was sent successfully"))
@@ -62,7 +68,6 @@ class ContactAdmin(FormView):
         try:
             send_mail(subject, message, from_email, [ADMIN_EMAIL])
         except Exception:
-            #return super(ContactAdmin, self).form_invalid(form)
             message = _(u'An unexpected error occurred while sending the email. Please try this form later')
             logger = logging.getLogger(__name__)
             logger.exception(message)
